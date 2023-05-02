@@ -69,6 +69,9 @@
         <div class="column is-two-thirds">
 
         <div class="block" style="text-align:left">
+			<p>
+				<br><em>(Click <a href="https://github.com/itsliuhongyu/6_sausage_kerbs">here</a> for the data analysis)</em>
+			</p>
             <p>
               <br>On April 23, 2023, rookie racecar driver Adam Fitzgerald was competing in the Formula Regional European Championship by Alpine at the Imola Circuit in Italy.
             </p>
@@ -224,6 +227,10 @@
 
 	.hidden { visibility: hidden; }
 
+	#monza-image {
+  	transition: opacity 5s ease-in-out;
+	}
+
 	/* When it's less than 700 pixels wide, do normal scrollytelling */
 	@media only screen and (min-width: 700px) {
 	  #scrolly.side-by-side {
@@ -300,17 +307,17 @@
 
 	d3.select("#step-zero").on('stepin', function(e) {
 		console.log("Got to step one")
-		d3.select("#monza-image").attr("src", "./Visualization/Scrolly1/Monza-Step-0.jpg").transition().duration(1000).style("opacity", 1);
+		d3.select("#monza-image").attr("src", "./Visualization/Scrolly1/Monza-Step-0.jpg").transition().duration(5000).style("opacity", 1);
 	})
 
 	d3.select("#step-one").on('stepin', function(e) {
 		console.log("Got to step one")
-		d3.select("#monza-image").attr("src", "./Visualization/Scrolly1/Monza-Step-1.jpg").transition().duration(1000).style("opacity", 1);
+		d3.select("#monza-image").attr("src", "./Visualization/Scrolly1/Monza-Step-1.jpg").transition().duration(5000).style("opacity", 1);
 	})
 
 	d3.select("#step-two").on('stepin', function(e) {
 		console.log("Got to step one")
-		d3.select("#monza-image").attr("src", "./Visualization/Scrolly1/Monza-Step-2.jpg").transition().duration(1000).style("opacity", 1);
+		d3.select("#monza-image").attr("src", "./Visualization/Scrolly1/Monza-Step-2.jpg").transition().duration(5000).style("opacity", 1);
 	})
 
 
@@ -524,7 +531,7 @@
 	
 		  <div class="scrolly-overlay">
 			<div class="step" id="step-monza-zero">
-			<p style="color: black;font-weight: bold;">
+			<p style="color: black;font-family:'Formula1' ;font-weight: bold;">
 				Italian Grand Prix, 2021
 			</p>
 			<p style="color: black;">
@@ -568,86 +575,87 @@
 		/* Changes follow by steps*/
 	
 		// Set up the video element
-var video = document.getElementById("myVideo");
-video.currentTime = 0;
-video.pause();
+		var video = document.getElementById("myVideo");
+		video.currentTime = 0;
+		video.pause();
 
-// Set up the steps
-var steps = d3.selectAll(".step");
+		d3.select("#step-monza-zero").on('stepin', function(e) {
+		console.log("Got to step monza-zero")
+		video.currentTime = 0;
+    	video.play();
+   		setTimeout(function() {
+    	video.pause();
+    	}, 1000)
+		})
 
-// Set up the scrollama instance
-var scroller = scrollama();
+		d3.select("#step-monza-one").on('stepin', function(e) {
+		console.log("Got to step monza-one")
+		d3.select(video).currentTime = 1
+    	video.play();
+   		setTimeout(function() {
+    	video.pause();
+    	}, 6000)
+		})
 
-// Set up the step zero
-scroller.addStep({
-  element: steps.nodes()[0],
-  offset: 0,
-  onEnter: function() {
-    console.log("Got to step zero");
-    video.currentTime = 0;
-    video.play();
-    setTimeout(function() {
-      video.pause();
-    }, 1000); // Pause the video after 1 second
-  },
-  onExit: function() {
-    video.pause();
-  }
-});
+		d3.select("#step-monza-two").on('stepin', function(e) {
+		console.log("Got to step monza-two")
+		d3.select(video).currentTime = 7
+    	video.play();
+   		setTimeout(function() {
+    	video.pause();
+    	}, 5000)
+		})
 
-// Set up the step one
-scroller.addStep({
-  element: steps.nodes()[1],
-  offset: 0,
-  onEnter: function() {
-    console.log("Got to step one");
-    video.currentTime = 1; // Start at 1 second
-    video.play();
-    setTimeout(function() {
-      video.pause();
-    }, 5000); // Pause the video after 5 seconds
-  },
-  onExit: function() {
-    video.pause();
-  }
-});
+		d3.select("#step-monza-three").on('stepin', function(e) {
+		console.log("Got to step monza-three")
+		d3.select(video).currentTime = 11
+    	video.play();
+   		setTimeout(function() {
+    	video.pause();
+    	}, 1000)
+		})
 
-// Set up the scrollama event listeners
-scroller.onStepEnter(function(response) {
-  console.log(response);
-});
+		d3.select("#step-monza-four").on('stepin', function(e) {
+		console.log("Got to step monza-four")
+		d3.select(video).currentTime = 13
+    	video.play();
+		setTimeout(function() {
+    	video.pause();
+    	}, 3000)
+		})
 
-scroller.onStepExit(function(response) {
-  console.log(response);
-});
+	</script>
 
-// Set up the resize event listener
-window.addEventListener("resize", scroller.resize);
 
-	
-	
-	  </script>
-	
-	<script>
-	  const scroller = scrollama();
-	
-	  scroller
-		  .setup({
-			  step: "#scrolly .scrolly-overlay .step",
-			  offset: 0.75,
-			  debug: false
-		  })
-		  .onStepEnter(function({ element, index, direction}) {
-			  const event = new CustomEvent('stepin', { detail: { direction: direction } })
-			  element.dispatchEvent(event);
-		  })
-		  .onStepExit(function({ element, index, direction }) {
-			  const event = new CustomEvent('stepout', { detail: { direction: direction } })
-			  element.dispatchEvent(event);
-		  });
-	
-	  window.addEventListener("resize", scroller.resize);
-	  </script>
+
+
+		<script>
+  const scroller2 = scrollama();
+
+  scroller2
+	  .setup({
+		  step: "#scrolly .scrolly-overlay .step",
+		  offset: 0.75,
+		  debug: false
+	  })
+	  .onStepEnter(function({ element, index, direction}) {
+		  const event = new CustomEvent('stepin', { detail: { direction: direction } })
+		  element.dispatchEvent(event);
+	  })
+	  .onStepExit(function({ element, index, direction }) {
+		  const event = new CustomEvent('stepout', { detail: { direction: direction } })
+		  element.dispatchEvent(event);
+	  });
+
+  window.addEventListener("resize", scroller2.resize);
+  </script>
+
+
+
+
+
+
+
 	
 	
 	  <!-- ai2html resizer script -->
@@ -761,7 +769,7 @@ window.addEventListener("resize", scroller.resize);
 </div>
 
 <!--Track bar Viz-->
-<!-- Generated by ai2html v0.115.5 - 2023-05-01 00:34 -->
+<!-- Generated by ai2html v0.115.5 - 2023-05-01 20:00 -->
 <!-- ai file: trackbar.ai -->
 <style media="screen,print">
 	#g-trackbar-box ,
@@ -829,14 +837,58 @@ window.addEventListener("resize", scroller.resize);
 		font-style:SemiBold;
 		text-align:center;
 	}
+	#g-trackbar-Artboard_2 {
+		position:relative;
+		overflow:hidden;
+	}
+	#g-trackbar-Artboard_2 p {
+		font-family:IBM Plex Serif;
+		font-weight:600;
+		font-style:normal;
+		line-height:14px;
+		opacity:1;
+		letter-spacing:0em;
+		font-size:12px;
+		text-align:left;
+		color:rgb(242,242,242);
+		text-transform:none;
+		padding-bottom:0;
+		padding-top:0;
+		mix-blend-mode:normal;
+		height:auto;
+		position:static;
+	}
+	#g-trackbar-Artboard_2 .g-pstyle0 {
+		font-weight:800;
+		font-style:Bold;
+		line-height:19px;
+		font-size:16px;
+	}
+	#g-trackbar-Artboard_2 .g-pstyle1 {
+		font-style:Regular;
+	}
+	#g-trackbar-Artboard_2 .g-pstyle2 {
+		font-weight:800;
+		font-style:Bold;
+		line-height:23px;
+		font-size:19px;
+		text-align:center;
+		color:rgb(0,0,0);
+	}
+	#g-trackbar-Artboard_2 .g-pstyle3 {
+		font-style:SemiBold;
+		line-height:16px;
+		font-size:13px;
+		text-align:center;
+	}
 
 </style>
 
 <div id="g-trackbar-box" class="ai2html">
 
 	<!-- Artboard: Artboard_1 -->
-	<div id="g-trackbar-Artboard_1" class="g-artboard" style="max-width: 750px;max-height: 750px" data-aspect-ratio="1" data-min-width="0">
-<div style="padding: 0 0 100% 0;"></div>
+	<div id="g-trackbar-Artboard_1" class="g-artboard" style="width:750px; height:750px;" data-aspect-ratio="1" data-min-width="651">
+<div style=""></div>
 		<img id="g-trackbar-Artboard_1-img" class="g-trackbar-Artboard_1-img g-aiImg" alt="" src="./Visualization/Trackbar/ai2html-output/trackbar-Artboard_1.png"/>
 		<div id="g-ai0-1" class="g-Layer_1 g-aiAbs" style="top:7.4667%;left:12.2667%;width:79.3333%;">
 			<p class="g-pstyle0">FIA issued slightly more out of track penalties to F1 drivers in the Circuit of the America</p>
@@ -859,26 +911,68 @@ window.addEventListener("resize", scroller.resize);
 		<div id="g-ai0-7" class="g-Layer_1 g-aiAbs" style="top:51.6%;left:82.4262%;margin-left:-4%;width:8%;">
 			<p class="g-pstyle2">3</p>
 		</div>
-		<div id="g-ai0-8" class="g-Layer_2 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 51.8965818324177%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 51.8965818324177%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 51.8965818324177%;top:88.5818%;margin-top:-26.4px;left:48.2465%;margin-left:-9.2%;width:18.4%;">
+		<div id="g-ai0-8" class="g-Layer_2 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 51.8966401097986%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 51.8966401097986%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 51.8966401097986%;top:88.5817%;margin-top:-26.4px;left:48.2514%;margin-left:-9.2%;width:18.4%;">
 			<p class="g-pstyle3">Autodromo Enzo e Dino Ferrari (Imola)</p>
 		</div>
-		<div id="g-ai0-9" class="g-Layer_2 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 51.84413519424%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 51.84413519424%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 51.84413519424%;top:88.2817%;margin-top:-27.1px;left:66.4155%;margin-left:-9.2%;width:18.4%;">
+		<div id="g-ai0-9" class="g-Layer_2 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 51.8441758078783%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 51.8441758078783%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 51.8441758078783%;top:88.2817%;margin-top:-27.1px;left:66.4204%;margin-left:-9.2%;width:18.4%;">
 			<p class="g-pstyle3">Autódromo Hermanos Rodríguez (Mexico City)</p>
 		</div>
-		<div id="g-ai0-10" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.84440718221%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.84440718221%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.84440718221%;top:87.6407%;margin-top:-7.3px;left:19.1803%;margin-left:-10.8%;width:21.6%;">
+		<div id="g-ai0-10" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.8439339268462%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.8439339268462%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.8439339268462%;top:87.6408%;margin-top:-7.3px;left:19.1852%;margin-left:-10.8%;width:21.6%;">
 			<p class="g-pstyle3">Circuit of the America</p>
 		</div>
-		<div id="g-ai0-11" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.8442634638948%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.8442634638948%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.8442634638948%;top:87.6407%;margin-top:-7.3px;left:33.6438%;margin-left:-9.1333%;width:18.2667%;">
+		<div id="g-ai0-11" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.8441674596808%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.8441674596808%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.8441674596808%;top:87.6407%;margin-top:-7.3px;left:33.6486%;margin-left:-9.1333%;width:18.2667%;">
 			<p class="g-pstyle3">Sochi Autodrom</p>
 		</div>
-		<div id="g-ai0-12" class="g-Layer_2 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.8439389098805%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.8439389098805%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.8439389098805%;top:87.7741%;margin-top:-7.3px;left:81.7915%;margin-left:-9.2%;width:18.4%;">
+		<div id="g-ai0-12" class="g-Layer_2 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.8442645890631%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.8442645890631%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.8442645890631%;top:87.7741%;margin-top:-7.3px;left:81.7964%;margin-left:-9.2%;width:18.4%;">
 			<p class="g-pstyle3">Circuit de Monaco</p>
+		</div>
+	</div>
+
+	<!-- Artboard: Artboard_2 -->
+	<div id="g-trackbar-Artboard_2" class="g-artboard" style="max-width: 400px;max-height: 400px" data-aspect-ratio="1" data-min-width="0" data-max-width="650">
+<div style="padding: 0 0 100% 0;"></div>
+		<img id="g-trackbar-Artboard_2-img" class="g-trackbar-Artboard_2-img g-aiImg" alt="" src="./Visualization/Trackbar/ai2html-output/trackbar-Artboard_2.png"/>
+		<div id="g-ai1-1" class="g-Layer_1 g-aiAbs" style="top:4.75%;left:10.875%;width:80.75%;">
+			<p class="g-pstyle0">FIA issued slightly more out of track penalties to F1 drivers in the Circuit of the America</p>
+		</div>
+		<div id="g-ai1-2" class="g-Layer_1 g-aiAbs" style="top:23%;left:10.8335%;width:79.25%;">
+			<p class="g-pstyle1">The number of out of track penalties FIA issued to drivers during Formula One races from 2014-2023</p>
+		</div>
+		<div id="g-ai1-3" class="g-Layer_1 g-aiAbs" style="top:38%;left:18.4691%;margin-left:-4%;width:8%;">
+			<p class="g-pstyle2">5</p>
+		</div>
+		<div id="g-ai1-4" class="g-Layer_1 g-aiAbs" style="top:47%;left:33.6122%;margin-left:-4%;width:8%;">
+			<p class="g-pstyle2">4</p>
+		</div>
+		<div id="g-ai1-5" class="g-Layer_1 g-aiAbs" style="top:58.25%;left:49.2329%;margin-left:-4%;width:8%;">
+			<p class="g-pstyle2">3</p>
+		</div>
+		<div id="g-ai1-6" class="g-Layer_1 g-aiAbs" style="top:58.25%;left:64.5865%;margin-left:-4%;width:8%;">
+			<p class="g-pstyle2">3</p>
+		</div>
+		<div id="g-ai1-7" class="g-Layer_1 g-aiAbs" style="top:58.25%;left:79.2726%;margin-left:-4%;width:8%;">
+			<p class="g-pstyle2">3</p>
+		</div>
+		<div id="g-ai1-8" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 57.6558905957553%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 57.6558905957553%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 57.6558905957553%;top:94.1327%;margin-top:-6.5px;left:16.0844%;margin-left:-10.875%;width:21.75%;">
+			<p class="g-pstyle3">Austin</p>
+		</div>
+		<div id="g-ai1-9" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 57.6708039800025%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 57.6708039800025%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 57.6708039800025%;top:93.8796%;margin-top:-6.5px;left:48.4816%;margin-left:-9.125%;width:18.25%;">
+			<p class="g-pstyle3">Imola</p>
+		</div>
+		<div id="g-ai1-10" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 56.3847970917514%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 56.3847970917514%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 56.3847970917514%;top:94.7078%;margin-top:-7.8px;left:64.2603%;margin-left:-9.25%;width:18.5%;">
+			<p class="g-pstyle3">Mexico City</p>
+		</div>
+		<div id="g-ai1-11" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 57.6547594532233%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 57.6547594532233%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 57.6547594532233%;top:94.133%;margin-top:-6.5px;left:33.3621%;margin-left:-9.25%;width:18.5%;">
+			<p class="g-pstyle3">Sochi</p>
+		</div>
+		<div id="g-ai1-12" class="g-Layer_1 g-aiAbs" style="transform: matrix(0.866,-0.5,0.5,0.866,0,0);transform-origin: 50% 58.1764088374395%;-webkit-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-webkit-transform-origin: 50% 58.1764088374395%;-ms-transform: matrix(0.866,-0.5,0.5,0.866,0,0);-ms-transform-origin: 50% 58.1764088374395%;top:94.5288%;margin-top:-6.1px;left:79.2396%;margin-left:-9.25%;width:18.5%;">
+			<p class="g-pstyle3">Monaco</p>
 		</div>
 	</div>
 
 </div>
 
-<!-- End ai2html - 2023-05-01 00:34 -->
+<!-- End ai2html - 2023-05-01 20:00 -->
 
  <!--Are kerbs effective Pt2-->
  <div class="container is-fluid">
